@@ -17,7 +17,7 @@
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
-        // Initialize the map (default center and zoom will be overwritten by fitBounds)
+        // Initialize the map
         var map = L.map('map');
 
         // Set up the OpenStreetMap layer
@@ -47,8 +47,8 @@
             bounds.push(location.coords);  // Add each coordinate to bounds array
         });
 
-        // Adjust the map view to fit all the markers
-        map.fitBounds(bounds);
+        // Adjust the map view to fit all the markers with padding
+        map.fitBounds(bounds, { padding: [50, 50] });  // Add padding to ensure the markers are not at the very edge
     </script>
 </body>
 </html>
