@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        #map {
+            height: 100vh;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        // Initialize the map and set its view to a chosen geographical point and zoom level
+        var map = L.map('map').setView([-2.548926, 118.014863], 5); // Centering on Indonesia
+
+        // Set up the OpenStreetMap layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+
+        // Locations with coordinates
+        var locations = [
+            { name: "Aceh", coords: [5.548290, 95.323753] },
+            { name: "Medan", coords: [3.595196, 98.672223] },
+            { name: "Bandung", coords: [-6.917464, 107.619123] },
+            { name: "Salatiga", coords: [-7.331547, 110.492746] },
+            { name: "Yogyakarta", coords: [-7.795580, 110.369490] },
+            { name: "Bali", coords: [-8.340539, 115.091949] },
+            { name: "Amsterdam", coords: [52.367573, 4.904138] }
+        ];
+
+        // Add markers for each location
+        locations.forEach(function(location) {
+            L.marker(location.coords).addTo(map)
+                .bindPopup(location.name)
+                .openPopup();
+        });
+    </script>
+</body>
+</html>
