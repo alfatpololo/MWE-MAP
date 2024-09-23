@@ -49,6 +49,10 @@
 
         // Adjust the map view to fit all the markers with padding
         map.fitBounds(bounds, { padding: [50, 50] });  // Add padding to ensure the markers are not at the very edge
+
+        // Move the view down slightly
+        var center = map.getCenter();
+        map.setView([center.lat + 2, center.lng], map.getZoom()); // Menyesuaikan latitude ke bawah sedikit
     </script>
 </body>
 </html>
