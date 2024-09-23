@@ -17,8 +17,8 @@
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
-        // Initialize the map and set its view to a chosen geographical point and zoom level
-        var map = L.map('map').setView([-2.548926, 118.014863], 5); // Centering on Indonesia
+        // Initialize the map (default center and zoom will be overwritten by fitBounds)
+        var map = L.map('map');
 
         // Set up the OpenStreetMap layer
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -37,12 +37,18 @@
             { name: "Amsterdam", coords: [52.367573, 4.904138] }
         ];
 
+        // Create a bounds array to hold the coordinates
+        var bounds = [];
+
         // Add markers for each location
         locations.forEach(function(location) {
-            L.marker(location.coords).addTo(map)
-                .bindPopup(location.name)
-                .openPopup();
+            var marker = L.marker(location.coords).addTo(map)
+                .bindPopup(location.name);
+            bounds.push(location.coords);  // Add each coordinate to bounds array
         });
+
+        // Adjust the map view to fit all the markers
+        map.fitBounds(bounds);
     </script>
 </body>
 </html>
