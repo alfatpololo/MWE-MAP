@@ -40,9 +40,17 @@
         // Create a bounds array to hold the coordinates
         var bounds = [];
 
+        // Define a custom icon using your image
+        var customIcon = L.icon({
+            iconUrl: 'pin hejo.png', // Ganti dengan nama file ikon kustom Anda
+            iconSize: [30, 40], // Sesuaikan ukuran ikon
+            iconAnchor: [15, 45], // Titik jangkar ikon
+            popupAnchor: [0, -40] // Titik jangkar popup
+        });
+
         // Add markers for each location
         locations.forEach(function(location) {
-            var marker = L.marker(location.coords).addTo(map)
+            var marker = L.marker(location.coords, { icon: customIcon }).addTo(map)
                 .bindPopup(location.name);
             bounds.push(location.coords);  // Add each coordinate to bounds array
         });
@@ -50,9 +58,9 @@
         // Adjust the map view to fit all the markers with padding
         map.fitBounds(bounds, { padding: [50, 50] });  // Add padding to ensure the markers are not at the very edge
 
-        // Move the view up slightly to ensure all locations are visible
+        // Move the view down slightly
         var center = map.getCenter();
-        map.setView([center.lat - 0.5, center.lng], map.getZoom()); // Mengurangi latitude sedikit
+        map.setView([center.lat + 2, center.lng], map.getZoom()); // Menyesuaikan latitude ke bawah sedikit
     </script>
 </body>
 </html>
